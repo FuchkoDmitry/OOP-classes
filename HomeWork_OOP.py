@@ -24,10 +24,10 @@ class Student:
             print('Access denied')
 
     def __str__(self):
-        res = f'Имя: {self.name}\nФамилия:{self.surname}\n' \
-              f'Средняя оценка: {average_grade(self.grades)}\n' \
-              f'Курсы в процессе изучения: {", ".join(self.courses_in_progress)}' \
-              f'\nЗавершенные курсы: {", ".join(self.finished_courses)}'
+        res = f'Name: {self.name}\nSurname:{self.surname}\n' \
+              f'Average grade: {average_grade(self.grades)}\n' \
+              f'Courses in progress: {", ".join(self.courses_in_progress)}' \
+              f'\nFinished courses: {", ".join(self.finished_courses)}'
         return res
 
     def __gt__(self, classmate):
@@ -44,14 +44,7 @@ class Mentor:
         self.courses_attached = []
 
 
-def average_grade(journal):
-    total = 0
-    counter = 0
-    for grades in journal.values():
-        for grade in grades:
-            total += grade
-            counter += 1
-    return round(total/counter, 2)
+
 
 
 class Lecturer(Mentor):
@@ -60,8 +53,8 @@ class Lecturer(Mentor):
         self.grade_book = {}
 
     def __str__(self):
-        res = f'Имя: {self.name}\nФамилия:{self.surname}\nСредняя ' \
-              f'оценка за лекцию: {average_grade(self.grade_book)}'
+        res = f'Name: {self.name}\nSurname:{self.surname}\nAverage ' \
+              f'grade for the lecture: {average_grade(self.grade_book)}'
         return res
 
     def __gt__(self, colleague):
@@ -83,8 +76,18 @@ class Reviewer(Mentor):
             return 'Access denied'
 
     def __str__(self):
-        res = f'Имя: {self.name} \nФамилия: {self.surname}'
+        res = f'Name: {self.name} \nSurname: {self.surname}'
         return res
+
+
+def average_grade(journal):
+    total = 0
+    counter = 0
+    for grades in journal.values():
+        for grade in grades:
+            total += grade
+            counter += 1
+    return round(total/counter, 2)
 
 
 def avg_grade_students_in_course(students, course):
@@ -113,3 +116,5 @@ def avg_rating_course_lecturers(lecturers, course):
             return 'Check the passed arguments'
     return f'The average grade of the lecturers of the "{course}" ' \
            f'course is {round(total / counter, 2)}'
+
+
